@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #101010;
+  --foreground: #f5f5f7;
 }
 
 @theme inline {
@@ -10,17 +12,52 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* main colors */
+  --color-mnt: #00f5d4;
+  --color-prl: #9551F1;
+  --color-blk: #0a0a0f;
+  --color-wht: #f5f5f7;
+  --color-cyn: #16ffbd;
+  --color-rd: #ff006e;
+  --color-drk-blu: #141134;
+
+  /* shadows */
+  --shadow-mnt: 0 0 10px #00f5d4;
+  --shadow-prl: 0 0 15px #9551F1;
+  --shadow-blk: 0 0 10px #0a0a0f;
+  --shadow-wht: 0 0 10px #f5f5f7;
+  --shadow-cyn: 0 0 10px #16ffbd;
+  --shadow-rd: 0 0 10px #ff006e;
+
+  --text-shadow-mnt: 0 0 10px #00f5d4;
+  --text-shadow-prl: 0 0 10px #9551F1;
+  --text-shadow-blk: 0 0 10px #0a0a0f;
+  --text-shadow-wht: 0 0 10px #f5f5f7;
+  --text-shadow-cyn: 0 0 10px #16ffbd;
+  --text-shadow-rd: 0 0 10px #ff006e;
+
+  --drop-shadow-mnt: 0 0 5px #00f5d4;
+  --drop-shadow-prl: 0 0 5px #9551F1;
+  --drop-shadow-blk: 0 0 5px #0a0a0f;
+  --drop-shadow-wht: 0 0 5px #f5f5f7;
+  --drop-shadow-cyn: 0 0 5px #16ffbd;
+  --drop-shadow-rd: 0 0 5px #ff006e;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #101010;
+    /* --background: #000; */
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
+  background: #08171F;
+  background: linear-gradient(145deg, rgba(8, 23, 31, 1) 1%, rgba(4, 11, 17, 1) 50%, #141134 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
