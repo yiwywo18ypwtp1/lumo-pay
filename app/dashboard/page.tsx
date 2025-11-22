@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from 'react'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/16/solid'
 
-import Icon from '@mdi/react';
 import { mdiCurrencyUsd, mdiCurrencyUah, mdiCurrencyEur } from '@mdi/js';
+import AnalyticsCard from './components/AnalyticsCard';
+import BalanceCard from './components/BalanceCard';
 
-type Accaunt = { cur: "USD" | "UAH" | "EUR"; balance: number, cur_icon: string };
+import type { Accaunt } from '@/types/accaunt';
 
 const accaunts: Accaunt[] = [
     { cur: "USD", balance: 7550.55, cur_icon: mdiCurrencyUsd },
@@ -15,82 +14,81 @@ const accaunts: Accaunt[] = [
     { cur: "EUR", balance: 2305.20, cur_icon: mdiCurrencyEur },
 ];
 
+const lastWeekSpendings = {
+    USD: [
+        { date: "Mon", amount: 295 },
+        { date: "Tue", amount: 180 },
+        { date: "Wed", amount: 1070 },
+        { date: "Tru", amount: 254 },
+        { date: "Fri", amount: 527 },
+        { date: "Sun", amount: 922 },
+        { date: "Sat", amount: 95 },
+    ],
+    UAH: [
+        { date: "Mon", amount: 720 },
+        { date: "Tue", amount: 271 },
+        { date: "Wed", amount: 1070 },
+        { date: "Tru", amount: 254 },
+        { date: "Fri", amount: 1460 },
+        { date: "Sun", amount: 680 },
+        { date: "Sat", amount: 505 },
+    ],
+    EUR: [
+        { date: "Mon", amount: 512 },
+        { date: "Tue", amount: 1621 },
+        { date: "Wed", amount: 928 },
+        { date: "Tru", amount: 124 },
+        { date: "Fri", amount: 365 },
+        { date: "Sun", amount: 2254 },
+        { date: "Sat", amount: 890 },
+    ]
+};
+
+
+
 const Dashboard = () => {
     const [selected, setSelected] = useState<Accaunt>(accaunts[0]);
+
+    const analyticsData = lastWeekSpendings[selected.cur];
 
     return (
         <div className="w-full h-full p-16 flex flex-col gap-16">
             <div className="w-full h-1/2 flex flex-row gap-16">
-                <div className="w-1/2 rounded-4xl p-[1px] bg-gradient-to-br from-[#007bf5] to-[#00f5d4]">
-                    <div className="h-full rounded-4xl bg-blk backdrop-blur-xl p-9 flex flex-col justify-between">
-                        <div className="flex flex-row gap-3 w-full">
-                            <p className="opacity-50">Balance</p>
+                <div className="w-1/2 rounded-4xl border border-white/25 p-4">
+                    <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col justify-between">
+                        <BalanceCard accaunts={accaunts} selected={selected} setSelected={setSelected} />
+                    </div>
+                </div>
 
-                            <div className="relative inline-block text-left">
-                                <Menu>
-                                    <MenuButton className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-1.5 text-sm text-white hover:bg-white/20 cursor-pointer">
-                                        {selected.cur}
-                                        <ChevronDownIcon className="size-4 fill-white/60" />
-                                    </MenuButton>
+                <div className="w-1/2 rounded-4xl border border-white/25 p-4">
+                    <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col justify-between">
+                        <div className="w-full flex justify-between items-center">
+                            <p className="text-lg">Recent transactions</p>
 
-                                    <MenuItems
-                                        transition
-                                        anchor="bottom"
-                                        className="w-32 origin-top rounded-xl border border-white/5 bg-neutral-900 p-1 text-sm text-white transition duration-100 ease-out focus:outline-none data-closed:scale-95 data-closed:opacity-0"
-                                    >
-                                        {accaunts.map((item, i) => (
-                                            <MenuItem key={i}>
-                                                <button
-                                                    onClick={() => setSelected(item)}
-                                                    className={`group flex w-full items-center justify-center gap-2 rounded-lg px-3 py-1.5 cursor-pointer transition-all duration-300 ${selected.cur === item.cur ? "bg-prl" : "hover:bg-white/5"
-                                                        }`}
-                                                >
-                                                    <Icon path={item.cur_icon} size={0.75} className="opacity-50" />
-                                                    <p className="text-center">{item.cur}</p>
-                                                </button>
-                                            </MenuItem>
-                                        ))}
-                                    </MenuItems>
-                                </Menu>
+                            <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
+                                <p>To <u>transactions</u></p>
+                                <img src="svg2/view-more.svg" alt="" className="h-5" />
                             </div>
                         </div>
-
-                        <div className="flex flex-row items-center w-full text-6xl">
-                            <Icon path={selected.cur_icon} size={2.5} />
-                            <h1>{selected.balance.toLocaleString("fr-FR")}</h1>
-                        </div>
-
-                        <div className="flex flex-row gap-5">
-                            <button className="border border-prl w-36 h-16 rounded-2xl font-semibold text-prl">Send</button>
-                            <button className="bg-prl w-36 h-16 rounded-2xl font-semibold text-shadow-wht hover:shadow-prl transition-all duration-150 cursor-pointer">Add</button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* <div className="w-1/2 rounded-4xl p-[1px] bg-gradient-to-br from-[#007bf5] to-[#7f00f5]">
-                    <div className="h-full rounded-4xl bg-blk/90 backdrop-blur-xl p-9 flex flex-col justify-between">
-                        Recent transactions
-                    </div>
-                </div> */}
-
-                <div className="w-1/2 rounded-4xl border border-white/30 p-5">
-                    <div className="h-full rounded-3xl bg-white/5 backdrop-blur-xl p-9 flex flex-col justify-between">
-                        Recent transactions
                     </div>
                 </div>
             </div>
 
-            <div className="w-full h-1/2 p-9 outline outline-mnt rounded-4xl">
-                Analytics
-            </div>
-            {/* <div className="relative rounded-2xl p-px bg-linear-to-br from-mnt to-[#9b5de5]">
-                <div className="rounded-2xl bg-blk/90 backdrop-blur-xl p-6">
-                    
-                    <h2 className="text-wht text-lg font-semibold">Main balance</h2>
-                    <p className="text-3xl font-bold">$12,539.00</p>
+            <div className="w-full h-1/2 rounded-4xl border border-white/25 p-4">
+                <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col gap-3 justify-between">
+                    <div className="w-full flex justify-between items-center">
+                        <p className="text-lg">Expenses for the last 7 days</p>
+
+                        <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
+                            <p>To <u>analytics</u></p>
+                            <img src="svg2/view-more.svg" alt="" className="h-5" />
+                        </div>
+                    </div>
+
+                    <AnalyticsCard data={analyticsData} />
                 </div>
-            </div> */}
-        </div>
+            </div>
+        </div >
     )
 }
 
