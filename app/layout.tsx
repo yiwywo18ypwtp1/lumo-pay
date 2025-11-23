@@ -24,7 +24,7 @@ export default function RootLayout({
         className={`${spaceMono.className} flex flex-row`}
       >
         <SidePanel />
-        <div className="flex flex-col w-full items-center">
+        <div className="flex flex-col w-full items-center h-screen">
           <Header />
           {children}
         </div>

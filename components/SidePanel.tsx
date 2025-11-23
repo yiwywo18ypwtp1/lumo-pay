@@ -4,18 +4,18 @@ import { useRef, useState, useEffect, act } from "react";
 import { useRouter } from "next/navigation";
 
 const PAGES = [
-    { name: "Dashboard", icon: "svg2/dashboard.svg" },
-    { name: "Analytics", icon: "svg2/analytics.svg" },
-    { name: "Transactions", icon: "svg2/transactions.svg" },
-    { name: "Accaunts", icon: "svg2/accaunts-2.svg" },
-    { name: "Settings", icon: "svg2/settings.svg" },
+    { name: "Dashboard", icon: "/svg2/dashboard.svg" },
+    { name: "Analytics", icon: "/svg2/analytics.svg" },
+    { name: "Transactions", icon: "/svg2/transactions.svg" },
+    { name: "Accaunts", icon: "/svg2/accaunts-2.svg" },
+    { name: "Settings", icon: "/svg2/settings.svg" },
 ]
 
 const SidePanel = () => {
     const router = useRouter();
     const [active, setActive] = useState(0);
 
-    const refs = useRef<(HTMLDivElement | null)[]>([]);
+    const refs = useRef<(HTMLButtonElement | null)[]>([]);
     const [pos, setPos] = useState({ top: 0, height: 0 });
 
 
@@ -32,28 +32,32 @@ const SidePanel = () => {
     }, [active]);
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen w-1/5 bg-transparent rounde shadow-mnt border-r border-mnt">
-            <div className="bg-neutral-500/10 rounded-4xl p-3">
-                <div className="flex flex-col gap-6 w-fit h-fit justify-evenly relative">
+        <div className="w-1/5 h-screen px-20 py-16 border-r border-mnt flex items-center">
+            <div className="w-full h-full rounded-4xl bg-neutral-500/10 p-4">
+                <div className="relative flex flex-col h-full justify-between">
                     <div
-                        className="absolute bottom-0 bg-mnt-darker shadow-mnt rounded-3xl z-0 transition-all ease-in-out duration-500"
-                        style={{
-                            top: pos.top,
-                            height: pos.height,
-                            width: "100%",
-                            transform: `translateY(0)`
-                        }}
+                        className="absolute left-0 right-0 rounded-3xl border border-mnt-darker shadow-mnt z-0 transition-all duration-500"
+                        style={{ top: pos.top, height: pos.height }}
                     />
 
                     {PAGES.map((item, i) => (
-                        <div
-                            ref={(el) => { (refs.current[i] = el) }}
+                        <button
                             key={i}
+                            ref={(el) => { (refs.current[i] = el) }}
                             onClick={() => setActive(i)}
-                            className={`flex flex-col items-center justify-center p-6 h-36 w-36 z-10 cursor-pointer rounded-3xl transition-all`}>
-                            <img src={`${item.icon}`} className={`h-12 mb-1`} />
-                            <b>{item.name}</b>
-                        </div>
+                            className="
+                                relative z-10
+                                flex flex-col items-center justify-center
+                                aspect-square
+                                w-full
+                                max-h-[140px] 
+                                rounded-3xl
+                                transition-all
+                            "
+                        >
+                            <img src={item.icon} className="h-12 w-12 mb-1" />
+                            <b className="text-sm">{item.name}</b>
+                        </button>
                     ))}
                 </div>
             </div>

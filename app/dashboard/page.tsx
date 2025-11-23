@@ -7,6 +7,8 @@ import AnalyticsCard from './components/AnalyticsCard';
 import BalanceCard from './components/BalanceCard';
 
 import type { Accaunt } from '@/types/accaunt';
+import RecentTransactionsCard from './components/RecentTransactionsCard';
+
 
 const accaunts: Accaunt[] = [
     { cur: "USD", balance: 7550.55, cur_icon: mdiCurrencyUsd },
@@ -44,44 +46,44 @@ const lastWeekSpendings = {
     ]
 };
 
-
-
 const Dashboard = () => {
     const [selected, setSelected] = useState<Accaunt>(accaunts[0]);
 
     const analyticsData = lastWeekSpendings[selected.cur];
 
     return (
-        <div className="w-full h-full p-16 flex flex-col gap-16">
-            <div className="w-full h-1/2 flex flex-row gap-16">
-                <div className="w-1/2 rounded-4xl border border-white/25 p-4">
-                    <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col justify-between">
+        <div className="w-full h-full p-16 flex flex-col justify-between">
+            <div className="w-full min-h-[46%] h-[46%] flex flex-row justify-between">
+                <div className="min-w-[48%] w-[48%] rounded-4xl border border-white/25 p-4">
+                    <div className="h-full rounded-3xl bg-neutral-500/10 p-7 flex flex-col justify-between">
                         <BalanceCard accaunts={accaunts} selected={selected} setSelected={setSelected} />
                     </div>
                 </div>
 
-                <div className="w-1/2 rounded-4xl border border-white/25 p-4">
-                    <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col justify-between">
+                <div className="min-w-[48%] w-[48%] max-h-full rounded-4xl border border-white/25 p-4">
+                    <div className="h-full rounded-3xl bg-neutral-500/10 p-7 flex flex-col gap-3">
                         <div className="w-full flex justify-between items-center">
                             <p className="text-lg">Recent transactions</p>
 
                             <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
                                 <p>To <u>transactions</u></p>
-                                <img src="svg2/view-more.svg" alt="" className="h-5" />
+                                <img src="/svg2/view-more.svg" alt="" className="h-5" />
                             </div>
                         </div>
+
+                        <RecentTransactionsCard />
                     </div>
                 </div>
             </div>
 
-            <div className="w-full h-1/2 rounded-4xl border border-white/25 p-4">
-                <div className="h-full rounded-3xl bg-neutral-500/10 backdrop-blur-xl p-7 flex flex-col gap-3 justify-between">
+            <div className="w-full min-h-[46%] h-[46%] rounded-4xl border border-white/25 p-4">
+                <div className="h-full rounded-3xl bg-neutral-500/10 p-7 flex flex-col gap-3 justify-between">
                     <div className="w-full flex justify-between items-center">
-                        <p className="text-lg">Expenses for the last 7 days</p>
+                        <p className="text-lg">Spendings for last 7 days</p>
 
                         <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
                             <p>To <u>analytics</u></p>
-                            <img src="svg2/view-more.svg" alt="" className="h-5" />
+                            <img src="/svg2/view-more.svg" alt="" className="h-5" />
                         </div>
                     </div>
 
@@ -89,7 +91,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </div >
-    )
+    );
 }
 
 export default Dashboard;

@@ -83,3 +83,7 @@ body {
     cursor: pointer;
   }
 }
+
+.scroll-hide {
+  scrollbar-width: none;
+}
