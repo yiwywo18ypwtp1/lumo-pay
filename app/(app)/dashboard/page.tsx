@@ -65,8 +65,8 @@ const Dashboard = () => {
                         <div className="w-full flex justify-between items-center">
                             <p className="text-lg">Recent transactions</p>
 
-                            <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
-                                <p>To <u>transactions</u></p>
+                            <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 hover:underline transition-all cursor-pointer">
+                                <p>To transactions</p>
                                 <img src="/svg2/view-more.svg" alt="" className="h-5" />
                             </div>
                         </div>
@@ -81,8 +81,8 @@ const Dashboard = () => {
                     <div className="w-full flex justify-between items-center">
                         <p className="text-lg">Spendings for last 7 days</p>
 
-                        <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 transition-all cursor-pointer">
-                            <p>To <u>analytics</u></p>
+                        <div className="text-sm flex items-center gap-1 opacity-50 hover:opacity-100 hover:underline transition-all cursor-pointer">
+                            <p>To analytics</p>
                             <img src="/svg2/view-more.svg" alt="" className="h-5" />
                         </div>
                     </div>
