@@ -36,7 +36,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
-        router.push("/auth/login");
+        router.push("/auth");
     };
 
     return (
@@ -72,7 +72,7 @@ const Header = () => {
                     ) : (
                         <>
                             <button
-                                onClick={() => router.push("/auth/login")}
+                                onClick={() => router.push("/auth")}
                                 className="opacity-60 underline hover:opacity-100 transition"
                             >
                                 Log in
